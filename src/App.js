@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+import MemberManage from './pages/MemberManage';
+import ProjectMember from './pages/ProjectManage';
+import ProjectDetail from './pages/ProjectDetail';
+import Page404 from './pages/404';
+import Navbar from './components/Navbar';
+import ReactNotification from 'react-notifications-component'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+    return (
+        <Router>
+             <ReactNotification />
+            <Navbar></Navbar>
+             <div>
+            <Switch>
+                
+            
+           
+                    <Route exact path={["/",'/projectManage']}>
+                        <ProjectMember />
+                    </Route>
+                    <Route path="/memberManage">
+                        <MemberManage />
+                    </Route>
+                    <Route path="/projectDetail/:id">
+                        <ProjectDetail />
+                    </Route>
+                    <Route path="*">
+                        <Page404></Page404>
+                    </Route>
+            
+            
+            </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
